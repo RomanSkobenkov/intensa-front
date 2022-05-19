@@ -1,0 +1,126 @@
+@use 'sass:math'
+
+body
+  color: $main-text-color
+  font-family: "Inter", "Roboto", sans-serif
+
+img
+  display: inline-block
+  max-width: 100%
+  height: auto
+
+.container
+  max-width: 1400px
+  margin:
+    top: 30px
+    bottom: 50px
+    left: auto
+    right: auto
+
+.content
+  display: flex
+  margin-bottom: 150px
+
+  &_column
+    width: 50%
+
+    &--background
+      padding-top: 280px
+      background:
+        image: url('../img/dest/cup.png')
+        repeat: no-repeat
+        position: -50% -3%
+
+  &_title
+    text-transform: uppercase
+    font:
+      size: 67px
+      weight: 500
+      style: normal
+    line-height: 81px
+
+  &_text
+    font:
+      size: 35px
+      weight: 400
+      style: normal
+    line-height: 42px
+    margin-bottom: 65px
+
+  &_list
+    font:
+      size: 20px
+      weight: 500
+      style: normal
+    line-height: 26px
+    list-style-type: none
+    counter-reset: item
+    display: flex
+    flex-wrap: wrap
+    padding: 0
+
+    &-item
+      display: flex
+      flex-direction: column
+      width: 50%
+      margin-bottom: 50px
+
+      &::before
+        font:
+          size: 16px
+          weight: 700
+          style: normal
+
+      &:nth-child(-n+9)::before
+        content: '0' counter(item)
+        counter-increment: item
+        color: $second-text-color
+
+      &:nth-child(n+10)::before
+        content: counter(item)
+        counter-increment: item
+        color: $second-text-color
+
+  &_reward-text
+    width: 200px
+    margin:
+      left: 50%
+      bottom: 30px
+    font:
+      size: 16px
+      weight: 700
+      style: normal
+    line-height: 21px
+
+.footer
+  display: flex
+  justify-content: space-between
+  align-items: center
+  flex-wrap: wrap
+
+  &_img
+    width: 25%
+    text-align: center
+
+    &:first-child
+      text-align: left
+
+    &:last-child
+      text-align: right
+
+$odd: 1
+@for $i from 1 through  math.div($list-items-num, 2)
+  $odd: $odd + 2
+  .content_list-item:nth-child(#{$i})
+    order: #{$odd}
+
+$even: 2
+@for $i from math.div($list-items-num, 2) + 1 through $list-items-num
+  $even: $even + 2
+  .content_list-item:nth-child(#{$i})
+    order: #{$even}
+
+
+
+
+
