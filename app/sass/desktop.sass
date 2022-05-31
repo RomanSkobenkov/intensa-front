@@ -55,8 +55,8 @@ img
     line-height: 26px
     list-style-type: none
     counter-reset: item
-    display: flex
-    flex-wrap: wrap
+    display: grid
+    grid-template-columns: 50%
     padding: 0
 
     &-item
@@ -108,19 +108,11 @@ img
     &:last-child
       text-align: right
 
-$odd: 1
 @for $i from 1 through  math.div($list-items-num, 2)
-  $odd: $odd + 2
   .content_list-item:nth-child(#{$i})
-    order: #{$odd}
+    grid-column-start: 1
 
-$even: 2
 @for $i from math.div($list-items-num, 2) + 1 through $list-items-num
-  $even: $even + 2
   .content_list-item:nth-child(#{$i})
-    order: #{$even}
-
-
-
-
-
+    grid-column-start: 2
+    grid-row-start: $i - math.div($list-items-num, 2)
